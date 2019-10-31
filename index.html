@@ -44,7 +44,7 @@
         isDown = true;
         slider.classList.add('active');
         scrollLeft = slider.scrollLeft;
-        startX = e.pageX - slider.offsetLeft; //where you clicked, doesn't change when moving, only if you leave and click again 
+        startX = e.pageX - slider.offsetLeft; //where you clicked, doesn't change when moving, only if you leave and click again. The subtraction is the space outside the element(can be the margin)
     });
     
     slider.addEventListener('mouseleave', () => {
@@ -63,7 +63,9 @@
         if(!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft; //recalculate every time the mouse moves
-        console.log({x, startX})
+        const walk = x - startX;
+        slider.scrollLeft = scrollLeft - walk;
+        console.log({walk, scrollLeft})
     })
 </script>
 
